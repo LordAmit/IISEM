@@ -1,0 +1,32 @@
+﻿
+Microsoft Visual Studio Solution File, Format Version 12.00
+# Visual Studio 11
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "IISExpressManager", "IISExpressManager\IISExpressManager.csproj", "{6D638E94-F04B-4DA5-A786-BCFBE5D9C09F}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "IISExpressManagerTest", "IISExpressManagerTest\IISExpressManagerTest.csproj", "{F4EA233A-34AD-43FB-91E9-A881ECBB6030}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "TestConsole", "TestConsole\TestConsole.csproj", "{8F182090-7B2D-4CA9-A721-B6030E58A796}"
+EndProject
+Global
+	GlobalSection(SolutionConfigurationPlatforms) = preSolution
+		Debug|Any CPU = Debug|Any CPU
+		Release|Any CPU = Release|Any CPU
+	EndGlobalSection
+	GlobalSection(ProjectConfigurationPlatforms) = postSolution
+		{6D638E94-F04B-4DA5-A786-BCFBE5D9C09F}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{6D638E94-F04B-4DA5-A786-BCFBE5D9C09F}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{6D638E94-F04B-4DA5-A786-BCFBE5D9C09F}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{6D638E94-F04B-4DA5-A786-BCFBE5D9C09F}.Release|Any CPU.Build.0 = Release|Any CPU
+		{8F182090-7B2D-4CA9-A721-B6030E58A796}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{8F182090-7B2D-4CA9-A721-B6030E58A796}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{8F182090-7B2D-4CA9-A721-B6030E58A796}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{8F182090-7B2D-4CA9-A721-B6030E58A796}.Release|Any CPU.Build.0 = Release|Any CPU
+		{F4EA233A-34AD-43FB-91E9-A881ECBB6030}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{F4EA233A-34AD-43FB-91E9-A881ECBB6030}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{F4EA233A-34AD-43FB-91E9-A881ECBB6030}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{F4EA233A-34AD-43FB-91E9-A881ECBB6030}.Release|Any CPU.Build.0 = Release|Any CPU
+	EndGlobalSection
+	GlobalSection(SolutionProperties) = preSolution
+		HideSolutionNode = FALSE
+	EndGlobalSection
+EndGlobal
