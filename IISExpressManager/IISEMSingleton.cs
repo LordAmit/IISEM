@@ -8,6 +8,11 @@ namespace IISExpressManager
 {
     internal static class IISEMSingleton
     {
+        /*
+        Written by lordamit
+        lordamit {at] gmail [dot} com   
+        */
+
         internal static bool InstanceAlreadyExists()
         {
             var processes = Process.GetProcessesByName("iisexpressmanager");

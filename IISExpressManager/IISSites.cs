@@ -2,6 +2,10 @@
 {
     public class IISSites
     {
+        /*
+            Written by lordamit
+            lordamit {at] gmail [dot} com
+        */
         public IISSites(string siteName, string id)
         {
             SiteName = siteName;

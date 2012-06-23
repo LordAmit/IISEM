@@ -6,6 +6,10 @@ namespace IISExpressManager
 {
     internal class IISProcessManager
     {
+        /*
+            Written by lordamit
+         *  lordamit {at] gmail [dot} com
+        */
         private static List<IISSites> MapSiteNameWithProcessId(List<IISSites> iisSites, string processId, string siteName)
         {
             foreach (var iisSite in iisSites)

@@ -16,6 +16,10 @@ namespace IISExpressManager
         {
             Application.EnableVisualStyles();
             Application.SetCompatibleTextRenderingDefault(false);
+            /*
+            Written by lordamit
+             * lordamit {at] gmail [dot} com
+            */
             if (IISEMSingleton.InstanceAlreadyExists())
             {
                 MessageBox.Show(

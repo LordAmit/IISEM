@@ -9,9 +9,9 @@ using System.Resources;
 [assembly: AssemblyTitle("IISExpressManager")]
 [assembly: AssemblyDescription("IIS Express Manager is a simple utility program to manage IIS Express configured applications.")]
 [assembly: AssemblyConfiguration("")]
-[assembly: AssemblyCompany("Amit Seal Ami")]
+[assembly: AssemblyCompany("")]
 [assembly: AssemblyProduct("IISExpressManager V0.3B Sp1")]
-[assembly: AssemblyCopyright("Copyright © lordamit@gmail.com 2012")]
+[assembly: AssemblyCopyright("Licensed under MS-RL")]
 [assembly: AssemblyTrademark("")]
 [assembly: AssemblyCulture("")]
 

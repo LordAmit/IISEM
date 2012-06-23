@@ -7,6 +7,10 @@ namespace IISExpressManager
 {
     internal class ProcessCommandLineFinder
     {
+        /*
+            Written by lordamit
+            lordamit {at] gmail [dot} com
+        */
         private static List<string> _commandLines = new List<string>();
 
         internal static string FindProcessStartCommandLineByProcessId(int processId)

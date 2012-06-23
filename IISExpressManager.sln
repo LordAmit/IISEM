@@ -1,11 +1,16 @@
 ﻿
 Microsoft Visual Studio Solution File, Format Version 12.00
-# Visual Studio 11
+# Visual Studio 2012
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "IISExpressManager", "IISExpressManager\IISExpressManager.csproj", "{6D638E94-F04B-4DA5-A786-BCFBE5D9C09F}"
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "IISExpressManagerTest", "IISExpressManagerTest\IISExpressManagerTest.csproj", "{F4EA233A-34AD-43FB-91E9-A881ECBB6030}"
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "TestConsole", "TestConsole\TestConsole.csproj", "{8F182090-7B2D-4CA9-A721-B6030E58A796}"
+EndProject
+Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "License", "License", "{80EA54CC-23CD-4732-9270-92AC7AB3AA84}"
+	ProjectSection(SolutionItems) = preProject
+		License.txt = License.txt
+	EndProjectSection
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution

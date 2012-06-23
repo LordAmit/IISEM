@@ -5,6 +5,11 @@ namespace IISExpressManager
 {
     internal class IISExpressConfiguration
     {
+
+        /*
+            Written by lordamit
+         *  lordamit {at] gmail [dot} com
+        */
         private const string IISExpressConfigAddressPrefix = "%USERPROFILE%";
         /*private const string IISExpressConfigAddressPrefix = "tESTwRONG";*/
 

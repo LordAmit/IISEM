@@ -7,6 +7,10 @@ namespace IISExpressManager
 {
     internal class IISConfigReader
     {
+        /*
+            Written by lordamit
+            lordamit {at] gmail [dot} com   
+        */
         private static List<IISSites> _iisSites;
 
         internal static List<IISSites> ReadXmlFromConfig(IISExpressConfiguration iisExConfig)
@@ -23,7 +27,7 @@ namespace IISExpressManager
             XmlNodeList siteList = document.GetElementsByTagName("site");
             foreach (object node in siteList)
             {
-                var xmlElement = (XmlElement) node;
+                var xmlElement = (XmlElement)node;
                 _iisSites.Add(new IISSites(xmlElement.Attributes["name"].Value, xmlElement.Attributes["id"].Value));
             }
             return _iisSites;

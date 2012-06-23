@@ -2,6 +2,10 @@
 
 namespace IISExpressManager
 {
+    /*
+     Written by lordamit
+     lordamit {at] gmail [dot} com   
+    */
     internal class FindOperatingSystemBasedInfo
     {
         internal static string OperatingSystemSpecificIISLocation()
