@@ -97,9 +97,9 @@
             this.label3.Font = new System.Drawing.Font("Microsoft Sans Serif", 8.25F, System.Drawing.FontStyle.Italic, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.label3.Location = new System.Drawing.Point(376, 246);
             this.label3.Name = "label3";
-            this.label3.Size = new System.Drawing.Size(160, 13);
+            this.label3.Size = new System.Drawing.Size(143, 13);
             this.label3.TabIndex = 8;
-            this.label3.Text = "IIS Express Manager V0.3B SP1";
+            this.label3.Text = "IIS Express Manager V0.31B";
             // 
             // lblIIS
             // 
