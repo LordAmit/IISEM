@@ -10,11 +10,6 @@ namespace IISExpressManager
             Written by lordamit
          *  lordamit {at] gmail [dot} com
         */
-        private const string IISExpressConfigAddressPrefix = "%USERPROFILE%";
-        /*private const string IISExpressConfigAddressPrefix = "tESTwRONG";*/
-
-        private const string IISExpressConfigAddressSuffix =
-            "\\Documents\\IISExpress\\config\\applicationhost.config";
 
         private string _iisExpressAddress;
         private string _iisExpressConfigAddress;
@@ -52,9 +47,14 @@ namespace IISExpressManager
 
         internal void SetIISExpressConfigAddress()
         {
-            _iisExpressConfigAddress = Environment.ExpandEnvironmentVariables
-                (IISExpressConfigAddressPrefix);
-            _iisExpressConfigAddress += IISExpressConfigAddressSuffix;
+
+            /*
+             * Code changed based on the valuable feedbacks of Ido Flatow and Mike Van
+             * 24 June, 2012             
+             */
+            _iisExpressConfigAddress = Environment.GetFolderPath(
+                Environment.SpecialFolder.MyDocuments) +
+                                       "\\IISExpress\\config\\applicationhost.config";
         }
 
 
@@ -68,11 +68,7 @@ namespace IISExpressManager
         }
 
         #endregion
-
-        /*private const string IISExpressConfigAddressSuffix =
-            "TestWrong";*/
-        /*"\\Documents\\IISExpress\\config\\applicationhost.config";*/
-
+     
         internal string IISExpressAddress
         {
             get { return _iisExpressAddress; }
