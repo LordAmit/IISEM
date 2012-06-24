@@ -212,10 +212,11 @@ namespace IISExpressManager
             if (
                 IsAnswerYes(
                     MessageBox.Show(
-                        "Hi there!\nIISEM is a freeware created by Amit from Bangladesh.\nWant to check out his blog?",
+                        "Hi there!\nIISEM is a open source freeware initiated by Amit from Bangladesh." +
+                        "\nIt is available in CodePlex.\nWant to check out the codeplex homepage?",
                         "About", MessageBoxButtons.YesNo, MessageBoxIcon.Information)))
             {
-                const string target = "http://lordamit.blogspot.com/2012/05/iis-express-manager-v01b.html";
+                const string target = "http://iisem.codeplex.com/";
                 Process.Start(target);
             }
         }
