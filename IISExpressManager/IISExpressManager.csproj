@@ -80,7 +80,6 @@
     <Compile Include="Form1.Designer.cs">
       <DependentUpon>Form1.cs</DependentUpon>
     </Compile>
-    <Compile Include="IISManagerSingleton.cs" />
     <Compile Include="IISSites.cs" />
     <Compile Include="IISProcessManager.cs" />
     <Compile Include="ProcessCommandLineFinder.cs" />
@@ -113,6 +112,7 @@
   </ItemGroup>
   <ItemGroup>
     <Content Include="IISEM.ico" />
+    <Content Include="sample.xml" />
   </ItemGroup>
   <ItemGroup>
     <BootstrapperPackage Include=".NETFramework,Version=v4.0">

@@ -20,6 +20,7 @@ namespace IISExpressManager
         public Form1()
         {
             InitializeComponent();
+            
             _iisExpressConfig = new IISExpressConfiguration();
             SetStatusLabels();
             ListViewPropertySetter();
@@ -37,7 +38,18 @@ namespace IISExpressManager
                 item.SubItems.Add(iisSite.SiteName);
                 item.SubItems.Add(iisSite.Status);
                 item.SubItems.Add(iisSite.ProcessId);
+                item.SubItems.Add(iisSite.Port);
                 listView1.Items.Add(item);
+                listView1.Items[listView1.Items.Count-1].UseItemStyleForSubItems = false;
+                if(iisSite.Status.Equals("Started"))
+                {
+                    item.SubItems[2].ForeColor= Color.Green;
+                }else
+                {
+                    item.SubItems[2].ForeColor = Color.Red;
+                }
+                //Console.WriteLine(/*String.Format("{0}, {1}, {2}, {3}"), */
+                  //  item.SubItems[0].Text+item.SubItems[1].Text+ item.SubItems[2].Text+ item.SubItems[3].Text);
             }
         }
 
@@ -106,17 +118,13 @@ namespace IISExpressManager
 
         private void SetStatusLabels()
         {
-            if (_iisExpressConfig.CheckIISExpressConfigExistence())
-            {
-                lblIISConfigStatus.Text = "Found!";
-                lblIISConfigStatus.ForeColor = Color.Teal;
-            }
-            else
-            {
-                DisableAllButtonsWhenIISError();
-                lblIISConfigStatus.ForeColor = Color.Red;
-                textBox1.Text = "Please Install IIS Express";
-            }
+            SetStatusForIISExpressConfigFileExistence();
+            SetStatusForIISExpressExistence();
+        }
+
+        #region Set Statuses
+        private void SetStatusForIISExpressExistence()
+        {
             if (_iisExpressConfig.CheckIISExpressExistence())
             {
                 lblIISStatus.Text = "Found!";
@@ -124,8 +132,23 @@ namespace IISExpressManager
             }
             else
             {
-                DisableAllButtonsWhenIISError();
+                //DisableAllButtonsWhenIISError();
                 lblIISStatus.ForeColor = Color.Red;
+                textBox1.Text = "Please Install IIS Express";
+            }
+        }
+
+        private void SetStatusForIISExpressConfigFileExistence()
+        {
+            if (_iisExpressConfig.CheckIISExpressConfigExistence())
+            {
+                lblIISConfigStatus.Text = "Found!";
+                lblIISConfigStatus.ForeColor = Color.Teal;
+            }
+            else
+            {
+                //DisableAllButtonsWhenIISError();
+                lblIISConfigStatus.ForeColor = Color.Red;
                 textBox1.Text = "Please Install IIS Express";
             }
         }
@@ -135,12 +158,12 @@ namespace IISExpressManager
             textBox1.Text = "Site Name: " + _iisSites[selected].SiteName;
             textBox1.Text += "\r\nStatus: " + _iisSites[selected].Status;
         }
+        #endregion
 
         private bool IsAnswerYes(DialogResult dialogResult)
         {
             if (dialogResult == DialogResult.Yes)
                 return true;
-
             return false;
         }
 
@@ -180,77 +203,6 @@ namespace IISExpressManager
         }
 
         #endregion Notification Icon In System Tray
-
-        #region ButtonActions
-
-        private void DisableAllButtonsWhenIISError()
-        {
-            /*btnStart.Enabled = false;
-            btnStop.Enabled = false;*/
-            btnStopAll.Enabled = false;
-            btnResetAll.Enabled = false;
-            btnRefresh.Enabled = false;
-        }
-
-        private void btnRefresh_Click(object sender, EventArgs e)
-        {
-            ListViewCompleteReloadWithAssigningPID();
-        }
-
-        /*private void btnStart_Click(object sender, EventArgs e)
-        {
-            CheckAttemptToStartSelectedApp();
-        }
-
-        private void btnStop_Click(object sender, EventArgs e)
-        {
-            CheckAttemptToStopSelectedApp();
-        }*/
-
-        private void btnAbout_Click(object sender, EventArgs e)
-        {
-            if (
-                IsAnswerYes(
-                    MessageBox.Show(
-                        "Hi there!\nIISEM is a open source freeware initiated by Amit from Bangladesh." +
-                        "\nIt is available in CodePlex.\nWant to check out the codeplex homepage?",
-                        "About", MessageBoxButtons.YesNo, MessageBoxIcon.Information)))
-            {
-                const string target = "http://iisem.codeplex.com/";
-                Process.Start(target);
-            }
-        }
-
-        private void btnHelp_Click(object sender, EventArgs e)
-        {
-            MessageBox.Show("" +
-                            "1. Double Click to Start/Stop any Application in the list!"
-                            + "\n2. Press the refresh button to sync it with IIS Express",
-                            "IISEM Help", MessageBoxButtons.OK,
-                            MessageBoxIcon.Information);
-        }
-
-        private void btnResetAll_Click(object sender, EventArgs e)
-        {
-            if (
-                IsAnswerYes(
-                    MessageBox.Show(
-                        "Clicking this will:\n\n1. Stop all applications in IISExpress\n2. Refresh The list.\n\nAre you sure you want to do this?",
-                        "Reset IIS Express Manager", MessageBoxButtons.YesNo, MessageBoxIcon.Information)))
-            {
-                StopAllIISHostedApplications();
-                ListViewCompleteReloadMappedWithWebsiteList();
-            }
-        }
-
-        private void btnStopAll_Click(object sender, EventArgs e)
-        {
-            StopAllIISHostedApplications();
-            ListViewCompleteReloadMappedWithWebsiteList();
-            textBox1.Text = "Stopped all applications.";
-        }
-
-        #endregion ButtonActions
 
         #region ApplicationManage
 
@@ -335,5 +287,78 @@ namespace IISExpressManager
                 /*ListViewReInsertItems();*/
             }
         }
+
+        #region MenuItemActions
+        private void helpToolStripMenuItem1_Click(object sender, EventArgs e)
+        {
+            MessageBox.Show("" +
+                            "1. Double Click to Start/Stop any Application in the list!"
+                            + "\n2. Press F5 to sync it with IIS Express",
+                            "IISEM Help", MessageBoxButtons.OK,
+                            MessageBoxIcon.Information);
+        }
+
+        private void aboutToolStripMenuItem_Click(object sender, EventArgs e)
+        {
+            if (
+                IsAnswerYes(
+                    MessageBox.Show(
+                        "Hi there!\nIISEM is a open source freeware initiated by Amit from Bangladesh." +
+                        "\nIt is available in CodePlex.\nWant to check out the codeplex homepage?",
+                        "About", MessageBoxButtons.YesNo, MessageBoxIcon.Information)))
+            {
+                const string target = "http://iisem.codeplex.com/";
+                Process.Start(target);
+            }
+        }
+
+        private void resetToolStripMenuItem_Click(object sender, EventArgs e)
+        {
+            if (
+              IsAnswerYes(
+                  MessageBox.Show(
+                      "Clicking this will:\n" +
+                      "\n1. Stop all applications in IISExpress" +
+                      "\n2. Refresh The list." +
+                      "\n\nAre you sure you want to do this?",
+                      "Reset IIS Express Manager", MessageBoxButtons.YesNo, MessageBoxIcon.Information)))
+            {
+                StopAllIISHostedApplications();
+                ListViewCompleteReloadMappedWithWebsiteList();
+            }
+        }
+
+        private void stopAllToolStripMenuItem_Click(object sender, EventArgs e)
+        {
+            StopAllIISHostedApplications();
+            ListViewCompleteReloadMappedWithWebsiteList();
+            textBox1.Text = "Stopped all applications.";
+        }
+
+        private void refreshToolStripMenuItem_Click(object sender, EventArgs e)
+        {
+            ListViewCompleteReloadWithAssigningPID();
+        }
+
+        private void runSiteToolStripMenuItem_Click(object sender, EventArgs e)
+        {
+            SayOops();
+        }
+        
+        private void editSiteToolStripMenuItem_Click(object sender, EventArgs e)
+        {
+            SayOops();
+        }
+
+        #endregion
+
+
+        private static void SayOops()
+        {
+            MessageBox.Show("Looks like it is not implemented yet.",
+                            "Oops", MessageBoxButtons.OK,
+                            MessageBoxIcon.Information);
+        }
+        
     }
 }
