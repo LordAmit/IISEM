@@ -209,9 +209,18 @@ namespace IISExpressManager
         private void StartSelectedApplication(int selected)
         {
             /*            int processId = */
-            IISProcessManager.ExecuteProcess(
-                _iisExpressConfig.IISExpressAddress, "/site:\""
-                + _iisSites[selected].SiteName + "\"");
+            try
+            {
+                IISProcessManager.ExecuteProcess(
+                        _iisExpressConfig.IISExpressAddress, "/site:\""
+                        + _iisSites[selected].SiteName + "\"");
+            }
+            catch (Exception ex)
+            {
+                _exitFromNotification = true;
+                Application.Exit();
+                return;
+            }
             /*_iisSites[selected].ProcessId = processId.ToString();*/
             _iisSites[selected].Status = "Started";
             ListViewCompleteReloadWithAssigningPID();
