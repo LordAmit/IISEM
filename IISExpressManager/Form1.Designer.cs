@@ -40,13 +40,16 @@
             this.siteName = ((System.Windows.Forms.ColumnHeader)(new System.Windows.Forms.ColumnHeader()));
             this.status = ((System.Windows.Forms.ColumnHeader)(new System.Windows.Forms.ColumnHeader()));
             this.processId = ((System.Windows.Forms.ColumnHeader)(new System.Windows.Forms.ColumnHeader()));
+            this.portNumber = ((System.Windows.Forms.ColumnHeader)(new System.Windows.Forms.ColumnHeader()));
             this.textBox1 = new System.Windows.Forms.TextBox();
             this.notifyIcon1 = new System.Windows.Forms.NotifyIcon(this.components);
             this.contextMenuStrip1 = new System.Windows.Forms.ContextMenuStrip(this.components);
             this.notificationIconContextItem1 = new System.Windows.Forms.ToolStripMenuItem();
             this.menuStrip1 = new System.Windows.Forms.MenuStrip();
             this.fileToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
+            this.runSiteToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.editToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
+            this.editSiteToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.toolsToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.resetToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.stopAllToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
@@ -55,11 +58,13 @@
             this.helpToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.helpToolStripMenuItem1 = new System.Windows.Forms.ToolStripMenuItem();
             this.aboutToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
-            this.portNumber = ((System.Windows.Forms.ColumnHeader)(new System.Windows.Forms.ColumnHeader()));
-            this.runSiteToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
-            this.editSiteToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
+            this.viewInBrowserToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
+            this.cntxIISSite = new System.Windows.Forms.ContextMenuStrip(this.components);
+            this.toggleStatusToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
+            this.folderBrowserDialog1 = new System.Windows.Forms.FolderBrowserDialog();
             this.contextMenuStrip1.SuspendLayout();
             this.menuStrip1.SuspendLayout();
+            this.cntxIISSite.SuspendLayout();
             this.SuspendLayout();
             // 
             // lblIISConfig
@@ -85,7 +90,7 @@
             // 
             this.label3.AutoSize = true;
             this.label3.Font = new System.Drawing.Font("Microsoft Sans Serif", 8.25F, System.Drawing.FontStyle.Italic, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.label3.Location = new System.Drawing.Point(625, 295);
+            this.label3.Location = new System.Drawing.Point(591, 295);
             this.label3.Name = "label3";
             this.label3.Size = new System.Drawing.Size(137, 13);
             this.label3.TabIndex = 8;
@@ -120,11 +125,12 @@
             this.portNumber});
             this.listView1.Location = new System.Drawing.Point(12, 27);
             this.listView1.Name = "listView1";
-            this.listView1.Size = new System.Drawing.Size(568, 191);
+            this.listView1.Size = new System.Drawing.Size(528, 191);
             this.listView1.TabIndex = 11;
             this.listView1.UseCompatibleStateImageBehavior = false;
             this.listView1.View = System.Windows.Forms.View.Details;
             this.listView1.DoubleClick += new System.EventHandler(this.ListViewDoubleClickItem);
+            this.listView1.MouseClick += new System.Windows.Forms.MouseEventHandler(this.listView1_MouseClick);
             // 
             // id
             // 
@@ -145,13 +151,18 @@
             this.processId.Text = "Process ID";
             this.processId.Width = 114;
             // 
+            // portNumber
+            // 
+            this.portNumber.Text = "Port Number";
+            this.portNumber.Width = 118;
+            // 
             // textBox1
             // 
-            this.textBox1.Location = new System.Drawing.Point(586, 27);
+            this.textBox1.Location = new System.Drawing.Point(546, 27);
             this.textBox1.Multiline = true;
             this.textBox1.Name = "textBox1";
             this.textBox1.ReadOnly = true;
-            this.textBox1.Size = new System.Drawing.Size(182, 128);
+            this.textBox1.Size = new System.Drawing.Size(182, 191);
             this.textBox1.TabIndex = 12;
             // 
             // notifyIcon1
@@ -185,7 +196,7 @@
             this.helpToolStripMenuItem});
             this.menuStrip1.Location = new System.Drawing.Point(0, 0);
             this.menuStrip1.Name = "menuStrip1";
-            this.menuStrip1.Size = new System.Drawing.Size(780, 24);
+            this.menuStrip1.Size = new System.Drawing.Size(737, 24);
             this.menuStrip1.TabIndex = 16;
             this.menuStrip1.Text = "menuStrip1";
             // 
@@ -197,6 +208,13 @@
             this.fileToolStripMenuItem.Size = new System.Drawing.Size(37, 20);
             this.fileToolStripMenuItem.Text = "File";
             // 
+            // runSiteToolStripMenuItem
+            // 
+            this.runSiteToolStripMenuItem.Name = "runSiteToolStripMenuItem";
+            this.runSiteToolStripMenuItem.Size = new System.Drawing.Size(117, 22);
+            this.runSiteToolStripMenuItem.Text = "Run Site";
+            this.runSiteToolStripMenuItem.Click += new System.EventHandler(this.runSiteToolStripMenuItem_Click);
+            // 
             // editToolStripMenuItem
             // 
             this.editToolStripMenuItem.DropDownItems.AddRange(new System.Windows.Forms.ToolStripItem[] {
@@ -204,6 +222,13 @@
             this.editToolStripMenuItem.Name = "editToolStripMenuItem";
             this.editToolStripMenuItem.Size = new System.Drawing.Size(39, 20);
             this.editToolStripMenuItem.Text = "Edit";
+            // 
+            // editSiteToolStripMenuItem
+            // 
+            this.editSiteToolStripMenuItem.Name = "editSiteToolStripMenuItem";
+            this.editSiteToolStripMenuItem.Size = new System.Drawing.Size(116, 22);
+            this.editSiteToolStripMenuItem.Text = "Edit Site";
+            this.editSiteToolStripMenuItem.Click += new System.EventHandler(this.editSiteToolStripMenuItem_Click);
             // 
             // toolsToolStripMenuItem
             // 
@@ -267,30 +292,33 @@
             this.aboutToolStripMenuItem.Text = "About";
             this.aboutToolStripMenuItem.Click += new System.EventHandler(this.aboutToolStripMenuItem_Click);
             // 
-            // portNumber
+            // viewInBrowserToolStripMenuItem
             // 
-            this.portNumber.Text = "Port Number";
-            this.portNumber.Width = 118;
+            this.viewInBrowserToolStripMenuItem.Name = "viewInBrowserToolStripMenuItem";
+            this.viewInBrowserToolStripMenuItem.Size = new System.Drawing.Size(157, 22);
+            this.viewInBrowserToolStripMenuItem.Text = "View in Browser";
+            this.viewInBrowserToolStripMenuItem.Click += new System.EventHandler(this.viewInBrowserToolStripMenuItem_Click);
             // 
-            // runSiteToolStripMenuItem
+            // cntxIISSite
             // 
-            this.runSiteToolStripMenuItem.Name = "runSiteToolStripMenuItem";
-            this.runSiteToolStripMenuItem.Size = new System.Drawing.Size(152, 22);
-            this.runSiteToolStripMenuItem.Text = "Run Site";
-            this.runSiteToolStripMenuItem.Click += new System.EventHandler(this.runSiteToolStripMenuItem_Click);
+            this.cntxIISSite.Items.AddRange(new System.Windows.Forms.ToolStripItem[] {
+            this.viewInBrowserToolStripMenuItem,
+            this.toggleStatusToolStripMenuItem});
+            this.cntxIISSite.Name = "contextMenuStrip2";
+            this.cntxIISSite.Size = new System.Drawing.Size(158, 48);
             // 
-            // editSiteToolStripMenuItem
+            // toggleStatusToolStripMenuItem
             // 
-            this.editSiteToolStripMenuItem.Name = "editSiteToolStripMenuItem";
-            this.editSiteToolStripMenuItem.Size = new System.Drawing.Size(152, 22);
-            this.editSiteToolStripMenuItem.Text = "Edit Site";
-            this.editSiteToolStripMenuItem.Click += new System.EventHandler(this.editSiteToolStripMenuItem_Click);
+            this.toggleStatusToolStripMenuItem.Name = "toggleStatusToolStripMenuItem";
+            this.toggleStatusToolStripMenuItem.Size = new System.Drawing.Size(157, 22);
+            this.toggleStatusToolStripMenuItem.Text = "Toggle Status";
+            this.toggleStatusToolStripMenuItem.Click += new System.EventHandler(this.toggleStatusToolStripMenuItem_Click);
             // 
             // Form1
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
-            this.ClientSize = new System.Drawing.Size(780, 317);
+            this.ClientSize = new System.Drawing.Size(737, 317);
             this.Controls.Add(this.textBox1);
             this.Controls.Add(this.listView1);
             this.Controls.Add(this.lblIISStatus);
@@ -311,6 +339,7 @@
             this.contextMenuStrip1.ResumeLayout(false);
             this.menuStrip1.ResumeLayout(false);
             this.menuStrip1.PerformLayout();
+            this.cntxIISSite.ResumeLayout(false);
             this.ResumeLayout(false);
             this.PerformLayout();
 
@@ -346,6 +375,10 @@
         private System.Windows.Forms.ColumnHeader portNumber;
         private System.Windows.Forms.ToolStripMenuItem runSiteToolStripMenuItem;
         private System.Windows.Forms.ToolStripMenuItem editSiteToolStripMenuItem;
+        private System.Windows.Forms.ContextMenuStrip cntxIISSite;
+        private System.Windows.Forms.ToolStripMenuItem viewInBrowserToolStripMenuItem;
+        private System.Windows.Forms.ToolStripMenuItem toggleStatusToolStripMenuItem;
+        private System.Windows.Forms.FolderBrowserDialog folderBrowserDialog1;
     }
 }
 

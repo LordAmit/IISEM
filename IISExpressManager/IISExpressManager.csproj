@@ -112,7 +112,9 @@
   </ItemGroup>
   <ItemGroup>
     <Content Include="IISEM.ico" />
-    <Content Include="sample.xml" />
+    <Content Include="sample.xml">
+      <SubType>Designer</SubType>
+    </Content>
   </ItemGroup>
   <ItemGroup>
     <BootstrapperPackage Include=".NETFramework,Version=v4.0">

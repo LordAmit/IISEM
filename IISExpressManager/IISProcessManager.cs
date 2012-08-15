@@ -4,6 +4,9 @@ using System.Diagnostics;
 
 namespace IISExpressManager
 {
+    using System.ComponentModel;
+    using System.Windows.Forms;
+
     internal class IISProcessManager
     {
         /*
@@ -45,7 +48,25 @@ namespace IISExpressManager
             p.StartInfo.WindowStyle = ProcessWindowStyle.Hidden;
             p.StartInfo.FileName = pathOfExe;
             p.StartInfo.Arguments = arguments;
-            p.Start();
+            try
+            {
+                p.Start();
+            }
+            catch (Win32Exception ex)
+            {
+                string fileName = DateTime.Now.ToString("dd_MM_yy-hh-mm-ss") + ".txt";
+                MessageBox.Show("Severe Error. It looks like your IISExpress is corrupted.\nPlease reinstall IISExpress"
+                    //+ "\nA logfile has been saved to your IISEM directory." 
+                                + "\nIISEM will close now.",
+                                "Alert!", MessageBoxButtons.OK, MessageBoxIcon.Error);
+                
+                /*
+                 * removed this part. No significant details can be found from the thrown exception.
+                //File.WriteAllText(fileName, ex.Message);
+                //File.AppendAllText(fileName, ex.StackTrace);
+                //File.AppendAllText(fileName,ex.NativeErrorCode.ToString());*/
+                throw;
+            }
             p.Dispose();
             p.Close();
             

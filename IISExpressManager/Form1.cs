@@ -10,7 +10,8 @@ namespace IISExpressManager
     {
         private readonly IISExpressConfiguration _iisExpressConfig;
         private bool _exitFromNotification;
-        internal bool ExitFromNotification { 
+        internal bool ExitFromNotification
+        {
             get { return _exitFromNotification; }
             set { _exitFromNotification = value; }
         }
@@ -20,7 +21,7 @@ namespace IISExpressManager
         public Form1()
         {
             InitializeComponent();
-            
+
             _iisExpressConfig = new IISExpressConfiguration();
             SetStatusLabels();
             ListViewPropertySetter();
@@ -40,16 +41,17 @@ namespace IISExpressManager
                 item.SubItems.Add(iisSite.ProcessId);
                 item.SubItems.Add(iisSite.Port);
                 listView1.Items.Add(item);
-                listView1.Items[listView1.Items.Count-1].UseItemStyleForSubItems = false;
-                if(iisSite.Status.Equals("Started"))
+                listView1.Items[listView1.Items.Count - 1].UseItemStyleForSubItems = false;
+                if (iisSite.Status.Equals("Started"))
                 {
-                    item.SubItems[2].ForeColor= Color.Green;
-                }else
+                    item.SubItems[2].ForeColor = Color.Green;
+                }
+                else
                 {
                     item.SubItems[2].ForeColor = Color.Red;
                 }
                 //Console.WriteLine(/*String.Format("{0}, {1}, {2}, {3}"), */
-                  //  item.SubItems[0].Text+item.SubItems[1].Text+ item.SubItems[2].Text+ item.SubItems[3].Text);
+                //  item.SubItems[0].Text+item.SubItems[1].Text+ item.SubItems[2].Text+ item.SubItems[3].Text);
             }
         }
 
@@ -112,6 +114,15 @@ namespace IISExpressManager
                 ListViewReInsertItems();
                 textBox1.Text = "";
             }
+        }
+
+        private void listView1_MouseClick(object sender, MouseEventArgs e)
+        {
+            if ((e.Button == MouseButtons.Right))
+            {
+                cntxIISSite.Show(this.listView1, e.Location);
+            }
+
         }
 
         #endregion ListViewMethods
@@ -209,9 +220,18 @@ namespace IISExpressManager
         private void StartSelectedApplication(int selected)
         {
             /*            int processId = */
-            IISProcessManager.ExecuteProcess(
-                _iisExpressConfig.IISExpressAddress, "/site:\""
-                + _iisSites[selected].SiteName + "\"");
+            try
+            {
+                IISProcessManager.ExecuteProcess(
+                        _iisExpressConfig.IISExpressAddress, "/site:\""
+                        + _iisSites[selected].SiteName + "\"");
+            }
+            catch (Exception ex)
+            {
+                _exitFromNotification = true;
+                Application.Exit();
+                return;
+            }
             /*_iisSites[selected].ProcessId = processId.ToString();*/
             _iisSites[selected].Status = "Started";
             ListViewCompleteReloadWithAssigningPID();
@@ -288,6 +308,38 @@ namespace IISExpressManager
             }
         }
 
+        #region Right Click context menu
+        private void viewInBrowserToolStripMenuItem_Click(object sender, EventArgs e)
+        {
+            int selected = ListViewFindSelectedItem();
+            if (selected > -1)
+            {
+                if (_iisSites[selected].Status.Equals("Started"))
+                {
+                    var uri = @"http://localhost:";
+                    uri += _iisSites[selected].Port;
+                    Process.Start(uri);
+                }
+            }
+        }
+
+        private void toggleStatusToolStripMenuItem_Click(object sender, EventArgs e)
+        {
+            int selected = ListViewFindSelectedItem();
+            if (selected > -1)
+            {
+                if (_iisSites[selected].Status.Equals("Started"))
+                {
+                    CheckAttemptToStopSelectedApp();
+                }
+                else if (_iisSites[selected].Status.Equals("Stopped"))
+                {
+                    CheckAttemptToStartSelectedApp();
+                }
+            }
+        }
+        #endregion
+
         #region MenuItemActions
         private void helpToolStripMenuItem1_Click(object sender, EventArgs e)
         {
@@ -342,9 +394,20 @@ namespace IISExpressManager
 
         private void runSiteToolStripMenuItem_Click(object sender, EventArgs e)
         {
-            SayOops();
+            if (folderBrowserDialog1.ShowDialog() == DialogResult.OK)
+            {
+                var folderPath = @"/path:";
+                folderPath += folderBrowserDialog1.SelectedPath;
+                IISProcessManager.ExecuteProcess(
+                    _iisExpressConfig.IISExpressAddress,
+                    folderPath
+                );
+
+            }
+
+
         }
-        
+
         private void editSiteToolStripMenuItem_Click(object sender, EventArgs e)
         {
             SayOops();
@@ -352,13 +415,18 @@ namespace IISExpressManager
 
         #endregion
 
-
         private static void SayOops()
         {
             MessageBox.Show("Looks like it is not implemented yet.",
                             "Oops", MessageBoxButtons.OK,
                             MessageBoxIcon.Information);
         }
-        
+
+
+
+
+
+
+
     }
 }
