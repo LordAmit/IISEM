@@ -94,7 +94,7 @@
             this.label3.Name = "label3";
             this.label3.Size = new System.Drawing.Size(137, 13);
             this.label3.TabIndex = 8;
-            this.label3.Text = "IIS Express Manager V0.4B";
+            this.label3.Text = "IIS Express Manager V0.5B";
             // 
             // lblIIS
             // 
