@@ -7,9 +7,7 @@ IIS Express Manager is a project which's primary goal is to provide a front-end 
 
 ### Manage your sites easily!
 IISEM allows you to view and start/stop your previously IIS Express hosted applications easily. All you have to do is to double click on any item to start/stop it. If you don't want it to get in your way - you can always close it and it will wait for you at the system tray. 
-
-
- 
+![](https://cloud.githubusercontent.com/assets/480479/24572852/6447b9d4-169e-11e7-8aa5-68285b5cb035.jpg)
 
 ### Portable is Good!
 IISEM is completely portable. You can download it and then run it instantly. You can move it to any place in your hard disk. It is possible to run it from your pen drive. It won't touch your registry. It won't even create a config file! 
